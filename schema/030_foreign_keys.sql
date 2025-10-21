@@ -1,0 +1,3 @@
+-- Auto-generated from schema-map.psd1 on 2025-10-21T02:32:05
+-- table: app_settings
+ALTER TABLE app_settings ADD CONSTRAINT fk_app_settings_user FOREIGN KEY (updated_by) REFERENCES users(id) ON DELETE SET NULL;
