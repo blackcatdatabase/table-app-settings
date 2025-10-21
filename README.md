@@ -61,7 +61,7 @@ erDiagram
     DATETIME(6) updated_at
     BIGINT updated_by
   }
-  APP_SETTINGS }o--|| USERS : (updated_by)
+  APP_SETTINGS }o--|| USERS : "updated_by"
 ```
 
 ## Indexes
