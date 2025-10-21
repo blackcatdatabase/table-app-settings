@@ -2,7 +2,7 @@
 
 ![SQL](https://img.shields.io/badge/SQL-MySQL%208.0%2B-4479A1?logo=mysql&logoColor=white) ![License](https://img.shields.io/badge/license-BlackCat%20Proprietary-red) ![Status](https://img.shields.io/badge/status-stable-informational) ![Generated](https://img.shields.io/badge/generated-from%20schema--map-blue)
 
-> Schema package for table **app_settings** (repo: $slug).
+> Schema package for table **app_settings** (repo: `app-settings`).
 
 ## Files
 ```
@@ -39,7 +39,7 @@ mysql -h 127.0.0.1 -P 3307 -u root -proot app < schema/030_foreign_keys.sql
 |-------:|:-----|:----:|:--------|:------|
 | setting_key | VARCHAR(100) | — | — | PK |
 | setting_value | TEXT | YES | — |  |
-| type | ENUM(''string'',''int'',''bool'',''json'',''secret'') | NO | — |  |
+| type | ENUM('string','int','bool','json','secret') | NO | — |  |
 | section | VARCHAR(100) | YES | — |  |
 | description | TEXT | YES | — |  |
 | is_protected | BOOLEAN | NO | FALSE |  |
@@ -52,14 +52,14 @@ mysql -h 127.0.0.1 -P 3307 -u root -proot app < schema/030_foreign_keys.sql
 ```mermaid
 erDiagram
   APP_SETTINGS {
-    VARCHAR(100) setting_key PK
-    TEXT setting_value
-    ENUM(''string'',''int'',''bool'',''json'',''secret'') type
-    VARCHAR(100) section
-    TEXT description
+    VARCHAR setting_key PK
+    VARCHAR setting_value
+    ENUM type
+    VARCHAR section
+    VARCHAR description
     BOOLEAN is_protected
-    DATETIME(6) updated_at
-    BIGINT updated_by
+    DATETIME updated_at
+    INT updated_by
   }
   APP_SETTINGS }o--|| USERS : "updated_by"
 ```
