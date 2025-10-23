@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace BlackCat\Database\Packages\AppSettings\Service;
 
-use BlackCat\Core\Database\Database;
+use BlackCat\Core\Database;
 use BlackCat\Database\Packages\AppSettings\Dto\AppSettingDto;
 use BlackCat\Database\Packages\AppSettings\Mapper\AppSettingDtoMapper;
 use BlackCat\Database\Packages\AppSettings\Repository\AppSettingRepository;
