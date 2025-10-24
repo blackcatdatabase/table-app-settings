@@ -6,7 +6,7 @@ namespace BlackCat\Database\Packages\AppSettings;
 final class Definitions {
     // --- základní metadata ---
     public static function table(): string { return 'app_settings'; }
-    public static function contractView(): string { return 'v_app_settings_contract'; }
+    public static function contractView(): string { return 'vw_app_settings'; }
     /** @return string[] */
     public static function columns(): array { return [ 'setting_key', 'setting_value', 'type', 'section', 'description', 'is_protected', 'updated_at', 'updated_by' ]; }
     public static function pk(): string { return 'setting_key'; }

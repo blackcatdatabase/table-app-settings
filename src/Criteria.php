@@ -6,7 +6,7 @@ namespace BlackCat\Database\Packages\AppSettings;
 /**
  * Bezpečný builder WHERE/ORDER/LIMIT.
  * - whitelist filtrů: [ 'setting_key', 'setting_value', 'type', 'section', 'description', 'is_protected', 'updated_at', 'updated_by' ]
- * - whitelist pro LIKE hledání: [ 'setting_key', 'setting_value', 'section', 'description' ]
+ * - whitelist pro LIKE hledání: [ 'setting_key', 'setting_value', 'type', 'section', 'description' ]
  */
 final class Criteria {
     /** @var array<string,mixed> */
@@ -61,7 +61,7 @@ final class Criteria {
 
         // fulltext/LIKE (přes whitelist)
         if ($this->search !== null) {
-            $searchCols = [ 'setting_key', 'setting_value', 'section', 'description' ];
+            $searchCols = [ 'setting_key', 'setting_value', 'type', 'section', 'description' ];
             $likeParts = [];
             foreach ($searchCols as $i=>$c) {
                 if ($c === '') continue;
