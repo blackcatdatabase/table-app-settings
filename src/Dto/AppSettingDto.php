@@ -5,7 +5,7 @@ namespace BlackCat\Database\Packages\AppSettings\Dto;
 
 /**
  * Jednoduché, neměnné DTO s veřejnými readonly vlastnostmi.
- * - Žádná logika; pouze nosič dat.
+ * - Bez logiky; pouze nosič dat.
  * - Silné typy drží kontrakt napříč vrstvami.
  */
 final class AppSettingDto {
@@ -17,12 +17,12 @@ final class AppSettingDto {
         public readonly ?string $description,
         public readonly bool $isProtected,
         public readonly \DateTimeImmutable $updatedAt,
+        public readonly int $version,
         public readonly ?int $updatedBy
     ) {}
 
-    /** Vhodné pro serializaci/logování (bez binárních/velkých blobů). */
+    /** Vhodné pro serializaci/logování (bez velkých blobů). */
     public function toArray(): array {
-        // get_object_vars funguje dobře s public readonly vlastnostmi
         return get_object_vars($this);
     }
 }

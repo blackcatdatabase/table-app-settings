@@ -1,4 +1,4 @@
--- Auto-generated from schema-map-postgres.psd1 (map@mtime:2025-10-24T09:46:38Z)
+-- Auto-generated from schema-map-postgres.psd1 (map@38d5403)
 -- engine: postgres
 -- table:  app_settings
 CREATE TABLE IF NOT EXISTS app_settings (
@@ -9,6 +9,8 @@ CREATE TABLE IF NOT EXISTS app_settings (
   description TEXT NULL,
   is_protected BOOLEAN NOT NULL DEFAULT FALSE,
   updated_at TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  version INTEGER NOT NULL DEFAULT 0,
+  CONSTRAINT chk_app_settings_version CHECK (version >= 0),
   updated_by BIGINT NULL,
-  CONSTRAINT chk_app_settings_type CHECK (type IN ('string','int','bool','json','secret'))
+  CONSTRAINT chk_app_settings_type CHECK ("type" IN ('string','int','bool','json','secret'))
 );

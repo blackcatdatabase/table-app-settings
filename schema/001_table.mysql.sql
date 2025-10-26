@@ -1,4 +1,4 @@
--- Auto-generated from schema-map-mysql.psd1 (map@mtime:2025-10-24T09:13:35Z)
+-- Auto-generated from schema-map-mysql.psd1 (map@38d5403)
 -- engine: mysql
 -- table:  app_settings
 CREATE TABLE IF NOT EXISTS app_settings (
@@ -9,5 +9,6 @@ CREATE TABLE IF NOT EXISTS app_settings (
   description TEXT NULL,
   is_protected BOOLEAN NOT NULL DEFAULT FALSE,
   updated_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  version INT UNSIGNED NOT NULL DEFAULT 0,
   updated_by BIGINT UNSIGNED NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
