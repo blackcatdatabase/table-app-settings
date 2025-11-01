@@ -9,7 +9,24 @@ final class Definitions {
     public static function contractView(): string { return 'vw_app_settings'; }
     /** @return string[] */
     public static function columns(): array { return [ 'setting_key', 'setting_value', 'type', 'section', 'description', 'is_protected', 'updated_at', 'version', 'updated_by' ]; }
-    public static function pk(): string { return 'setting_key'; }
+
+    /**
+     * Primární klíč(e) tabulky. Podporuje jednoduché i složené PK.
+     * setting_key může být "id" nebo "col1, col2".
+     * @return string[]
+     */
+    public static function pkColumns(): array {
+        $raw = 'setting_key';
+        // povol formát "a,b" i s mezerami
+        $parts = array_values(array_filter(array_map(
+            static fn($p) => trim($p, " \t\n\r\0\x0B`\""),
+            preg_split('/\s*,\s*/', $raw ?? '')
+        )));
+        if (!$parts) { return [$raw]; }
+        return $parts;
+    }
+    /** Zpětná kompatibilita: první sloupec z PK. */
+    public static function pk(): string { return self::pkColumns()[0]; }
 
     // --- volitelná metadata ---
     public static function softDeleteColumn(): ?string {
@@ -25,10 +42,25 @@ final class Definitions {
     public static function defaultOrder(): ?string {
         $c = 'setting_key DESC'; return $c !== '' ? $c : null;
     }
+
     /** @return array<int,array<int,string>> seznam unikátních klíčů */
-    public static function uniqueKeys(): array { return []; }
+    public static function uniqueKeys(): array { return [ [ 'setting_key' ] ]; }
+
     /** @return string[] JSON sloupce kvůli castům/operacím */
     public static function jsonColumns(): array { return []; }
+
+    /** @return string[] Seznam číselných sloupců (heuristika z generátoru; bez runtime DB dotazů). */
+    public static function intColumns(): array { return [ 'version', 'updated_by' ]; }
+
+    /** @return array<string,string> alias => column (pro normalizaci vstupů) */
+    public static function paramAliases(): array { return []; }
+
+    /** Hint pro repo: je sloupec s verzí opravdu číselný? (bez information_schema) */
+    public static function versionIsNumeric(): bool
+    {
+        $v = self::versionColumn();
+        return $v !== null && in_array($v, self::intColumns(), true);
+    }
 
     // --- pomocníci ---
     public static function hasColumn(string $col): bool {

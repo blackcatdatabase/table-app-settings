@@ -1,4 +1,4 @@
--- Auto-generated from schema-map-mysql.psd1 (map@38d5403)
+-- Auto-generated from schema-map-mysql.psd1 (map@c5e4097)
 -- engine: mysql
 -- table:  app_settings
 ALTER TABLE app_settings ADD CONSTRAINT fk_app_settings_user FOREIGN KEY (updated_by) REFERENCES users(id) ON DELETE SET NULL;
