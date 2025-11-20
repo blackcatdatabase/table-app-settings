@@ -2,7 +2,7 @@
 
 ![SQL](https://img.shields.io/badge/SQL-MySQL%208.0%2B-4479A1?logo=mysql&logoColor=white) ![License](https://img.shields.io/badge/license-BlackCat%20Proprietary-red) ![Status](https://img.shields.io/badge/status-stable-informational) ![Generated](https://img.shields.io/badge/generated-from%20schema--map-blue)
 
-<!-- Auto-generated from schema-map.psd1 @ 6cefe8e (2025-10-22T20:27:41+02:00) -->
+<!-- Auto-generated from schema-map-postgres.psd1 @ 62c9c93 (2025-11-20T21:38:11+01:00) -->
 
 > Schema package for table **app_settings** (repo: `app-settings`).
 
@@ -41,12 +41,13 @@ mysql -h 127.0.0.1 -P 3307 -u root -proot app < schema/030_foreign_keys.sql
 |-------:|:-----|:----:|:--------|:------|
 | setting_key | VARCHAR(100) | — | — | PK |
 | setting_value | TEXT | YES | — |  |
-| type | ENUM('string','int','bool','json','secret') | NO | — |  |
+| type | TEXT | NO | — |  |
 | section | VARCHAR(100) | YES | — |  |
 | description | TEXT | YES | — |  |
 | is_protected | BOOLEAN | NO | FALSE |  |
-| updated_at | DATETIME(6) | NO | CURRENT_TIMESTAMP(6) |  |
-| updated_by | BIGINT UNSIGNED | YES | — |  |
+| updated_at | TIMESTAMPTZ(6) | NO | CURRENT_TIMESTAMP(6) |  |
+| version | INTEGER | NO | 0 |  |
+| updated_by | BIGINT | YES | — |  |
 
 ## Relationships
 - FK → **users** via (updated_by) (ON DELETE SET NULL).
@@ -56,11 +57,12 @@ erDiagram
   APP_SETTINGS {
     VARCHAR setting_key PK
     VARCHAR setting_value
-    ENUM type
+    VARCHAR type
     VARCHAR section
     VARCHAR description
     BOOLEAN is_protected
-    DATETIME updated_at
+    TIMESTAMPTZ updated_at
+    INTEGER version
     INT updated_by
   }
   APP_SETTINGS }o--|| USERS : "updated_by"
