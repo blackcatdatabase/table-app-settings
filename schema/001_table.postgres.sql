@@ -1,6 +1,7 @@
--- Auto-generated from schema-map-postgres.psd1 (map@62c9c93)
+-- Auto-generated from schema-map-postgres.psd1 (map@mtime:2025-11-21T00:25:46Z)
 -- engine: postgres
 -- table:  app_settings
+
 CREATE TABLE IF NOT EXISTS app_settings (
   setting_key VARCHAR(100) PRIMARY KEY,
   setting_value TEXT NULL,

@@ -1,6 +1,7 @@
--- Auto-generated from schema-map-mysql.psd1 (map@62c9c93)
+-- Auto-generated from schema-map-mysql.psd1 (map@mtime:2025-11-27T15:13:14Z)
 -- engine: mysql
 -- table:  app_settings
+
 CREATE TABLE IF NOT EXISTS app_settings (
   setting_key VARCHAR(100) PRIMARY KEY,
   setting_value TEXT NULL,

@@ -43,7 +43,7 @@ final class AppSettingRepository implements RepoContract, KeysetRepoContract
 
     // --- INSERT / BULK -------------------------------------------------------
 
-    public function insert(array #[\SensitiveParameter] $row): void {
+    public function insert(#[\SensitiveParameter] array $row): void {
         $row = $this->filterCols($this->normalizeInputRow($row));
         if (!$row) return;
 
@@ -107,13 +107,13 @@ final class AppSettingRepository implements RepoContract, KeysetRepoContract
     }
 
     /** Standard upsert – preserves soft-delete (no revive). */
-    public function upsert(array #[\SensitiveParameter] $row): void
+    public function upsert(#[\SensitiveParameter] array $row): void
     {
         $this->doUpsert($row, false);
     }
 
     /** Upsert that revives soft-delete (sets deleted_at = NULL on conflict). */
-    public function upsertRevive(array #[\SensitiveParameter] $row): void
+    public function upsertRevive(#[\SensitiveParameter] array $row): void
     {
         $this->doUpsert($row, true);
     }
@@ -216,7 +216,7 @@ final class AppSettingRepository implements RepoContract, KeysetRepoContract
 
     // --- UPDATE / DELETE / RESTORE ------------------------------------------
 
-    public function updateById(int|string|array $id, array #[\SensitiveParameter] $row): int {
+    public function updateById(int|string|array $id, #[\SensitiveParameter] array $row): int {
         $row = $this->normalizeInputRow($row);
 
         $tbl   = Ident::qi($this->db, Definitions::table());
@@ -428,7 +428,7 @@ final class AppSettingRepository implements RepoContract, KeysetRepoContract
         $sql = "SELECT * FROM {$tbl} WHERE {$where}";
         if ($guard !== '1=1') { $sql .= ' AND ' . $guard; }
 
-        $dialect = $this->db->getDialect(); // 'postgres' | 'mysql' | 'mariadb' ...
+        $dialect = $this->db->dialect(); // 'postgres' | 'mysql' | 'mariadb' ...
         $for = 'FOR UPDATE';
         if ($strength === 'share') {
             if ($dialect === 'postgres' || $dialect === 'mysql') { $for = 'FOR SHARE'; }
@@ -473,20 +473,4 @@ final class AppSettingRepository implements RepoContract, KeysetRepoContract
 
     // === Generated unique helpers (per table UNIQUE/PK) ===
     
-    /** @return array<string,mixed>|\BlackCat\Database\Packages\AppSettings\Dto\AppSettingDto|null */
-    public function getBySettingKey(string $settingKey, bool $asDto = false): array|\BlackCat\Database\Packages\AppSettings\Dto\AppSettingDto|null {
-        $row = $this->getByUnique([ 'setting_key' => $settingKey ]);
-        if (!$asDto || !$row) return $row;
-        return \BlackCat\Database\Packages\AppSettings\Mapper\AppSettingDtoMapper::fromRow($row);
-    }
-    public function existsBySettingKey(string $settingKey): bool {
-        $where = 't.' . Ident::q($this->db, 'setting_key') . ' = :uniq_setting_key';
-        return $this->exists($where, [ 'uniq_setting_key' => $settingKey ]);
-    }
-    /** @return int|string|null */
-    public function getIdBySettingKey(string $settingKey) {
-        $row = $this->getBySettingKey($settingKey);
-        return $row ? ($row['setting_key'] ?? null) : null;
-    }
-
 }
