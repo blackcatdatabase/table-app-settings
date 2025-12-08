@@ -10,8 +10,8 @@ Application-wide key/value configuration.
 | section | VARCHAR(100) | YES |  | Logical group/namespace. |
 | setting_key | VARCHAR(100) | NO |  | Unique setting identifier (natural primary key). |
 | setting_value | TEXT | YES |  | Value as text (may contain JSON when type=json). |
-| type | TEXT | NO |  | Datatype of the value. (enum: string, int, bool, json, secret) |
-| updated_at | TIMESTAMPTZ(6) | NO | CURRENT_TIMESTAMP(6) | Last update timestamp (UTC). |
+| type | VARCHAR(20) | NO |  | Datatype of the value. (enum: string, int, bool, json, secret) |
+| updated_at | DATETIME(6) | NO | CURRENT_TIMESTAMP(6) | Last update timestamp (UTC). |
 | updated_by | BIGINT | YES |  | User who changed the setting (FK users.id). |
 
 ## Engine Details
@@ -35,5 +35,5 @@ Foreign keys:
 ## Views
 | View | Engine | Flags | File |
 | --- | --- | --- | --- |
-| vw_app_settings | mysql | algorithm=MERGE, security=INVOKER | [packages\app-settings\schema\040_views.mysql.sql](https://github.com/blackcatacademy/blackcat-database/packages/app-settings/schema/040_views.mysql.sql) |
-| vw_app_settings | postgres |  | [packages\app-settings\schema\040_views.postgres.sql](https://github.com/blackcatacademy/blackcat-database/packages/app-settings/schema/040_views.postgres.sql) |
+| vw_app_settings | mysql | algorithm=MERGE, security=INVOKER | [schema\040_views.mysql.sql](schema\040_views.mysql.sql) |
+| vw_app_settings | postgres |  | [schema\040_views.postgres.sql](schema\040_views.postgres.sql) |
