@@ -96,8 +96,8 @@ graph LR
 _No engine differences detected._
 
 ## Constraints Snapshot
-- `is_protected` – default=FALSE
 - `type` – enum
+- `is_protected` – default=FALSE
 - `updated_at` – default=CURRENT_TIMESTAMP(6)
 
 ## Schema Files
