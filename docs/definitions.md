@@ -5,12 +5,12 @@ Application-wide key/value configuration.
 ## Columns
 | Column | Type | Null | Default | Description |
 | --- | --- | --- | --- | --- |
-| description | TEXT | YES |  | Human-readable description. |
-| is_protected | BOOLEAN | NO | FALSE | Marks sensitive values for redaction in UIs. |
-| section | VARCHAR(100) | YES |  | Logical group/namespace. |
 | setting_key | VARCHAR(100) | NO |  | Unique setting identifier (natural primary key). |
 | setting_value | TEXT | YES |  | Value as text (may contain JSON when type=json). |
 | type | mysql: VARCHAR(20) / postgres: TEXT | NO |  | Datatype of the value. (enum: string, int, bool, json, secret) |
+| section | VARCHAR(100) | YES |  | Logical group/namespace. |
+| description | TEXT | YES |  | Human-readable description. |
+| is_protected | BOOLEAN | NO | FALSE | Marks sensitive values for redaction in UIs. |
 | updated_at | mysql: DATETIME(6) / postgres: TIMESTAMPTZ(6) | NO | CURRENT_TIMESTAMP(6) | Last update timestamp (UTC). |
 | updated_by | BIGINT | YES |  | User who changed the setting (FK users.id). |
 
