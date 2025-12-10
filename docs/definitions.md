@@ -10,8 +10,8 @@ Application-wide key/value configuration.
 | section | VARCHAR(100) | YES |  | Logical group/namespace. |
 | setting_key | VARCHAR(100) | NO |  | Unique setting identifier (natural primary key). |
 | setting_value | TEXT | YES |  | Value as text (may contain JSON when type=json). |
-| type | VARCHAR(20) | NO |  | Datatype of the value. (enum: string, int, bool, json, secret) |
-| updated_at | DATETIME(6) | NO | CURRENT_TIMESTAMP(6) | Last update timestamp (UTC). |
+| type | mysql: VARCHAR(20) / postgres: TEXT | NO |  | Datatype of the value. (enum: string, int, bool, json, secret) |
+| updated_at | mysql: DATETIME(6) / postgres: TIMESTAMPTZ(6) | NO | CURRENT_TIMESTAMP(6) | Last update timestamp (UTC). |
 | updated_by | BIGINT | YES |  | User who changed the setting (FK users.id). |
 
 ## Engine Details
