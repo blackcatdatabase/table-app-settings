@@ -41,11 +41,11 @@ final class Criteria extends BaseCriteria
         return [ 'setting_key', 'setting_value', 'type', 'section', 'description' ];
     }
 
-/** Columns allowed in ORDER BY (falls back to filterable() when empty). */
-protected function sortable(): array
-{
-    return [ 'setting_key', 'setting_value', 'type', 'section', 'description', 'is_protected', 'updated_at', 'version', 'updated_by' ];
-}
+    /** Columns allowed in ORDER BY (falls back to filterable() when empty). */
+    protected function sortable(): array
+    {
+        return [ 'setting_key', 'setting_value', 'type', 'section', 'description', 'is_protected', 'updated_at', 'version', 'updated_by' ];
+    }
 
     /**
      * Whitelist of joinable entities (for safe ->join() usage):
