@@ -1,0 +1,35 @@
+{
+  "tables": {
+    "app_settings": {
+      "columns": {
+        "description": {
+          "strategy": "passthrough"
+        },
+        "is_protected": {
+          "strategy": "passthrough"
+        },
+        "section": {
+          "strategy": "passthrough"
+        },
+        "setting_key": {
+          "strategy": "passthrough"
+        },
+        "setting_value": {
+          "strategy": "passthrough"
+        },
+        "type": {
+          "strategy": "passthrough"
+        },
+        "updated_at": {
+          "strategy": "passthrough"
+        },
+        "updated_by": {
+          "strategy": "passthrough"
+        },
+        "version": {
+          "strategy": "passthrough"
+        }
+      }
+    }
+  }
+}
